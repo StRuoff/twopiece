@@ -101,7 +101,6 @@ def display_dist(dist, name='', color='dodgerblue', bound=False, show='random_sa
             sample = sample[abs(sample) < 25]
 
         plt.figure('Random Sample')
-        set(style='whitegrid', rc={"grid.linewidth": 0.75, "figure.figsize": (9, 6)})
         distplot(sample, bins=50, kde=False, norm_hist=True,
                  hist_kws=dict(edgecolor="white", color=color, linewidth=1.0, alpha=0.60))
         x = arange(min(sample) - 2, max(sample) + 2, 0.01)
