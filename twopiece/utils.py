@@ -5,7 +5,6 @@ from numpy import min, max, arange, pi
 from seaborn import distplot
 from seaborn import set
 
-set(style='whitegrid', rc={"grid.linewidth": 0.75, "figure.figsize": (9, 6)})
 
 
 def get_sigma1_sigma2(sigma, gamma, kind):
@@ -59,6 +58,12 @@ def display_dist(dist, name='', color='dodgerblue', bound=False, show='random_sa
     :return: 1
     """
 
+    # This changes matplotlibs rcParams globally! it will then influence 
+    # all other matplotlib plots later on!
+    # I moved this inside this function, so we only call it if we actually plot
+    # anything.
+    set(style='whitegrid', rc={"grid.linewidth": 0.75, "figure.figsize": (9, 6)})
+
     if show in ['All', 'pdf']:
 
         x = arange(-10, 10, 0.01)
@@ -96,6 +101,7 @@ def display_dist(dist, name='', color='dodgerblue', bound=False, show='random_sa
             sample = sample[abs(sample) < 25]
 
         plt.figure('Random Sample')
+        set(style='whitegrid', rc={"grid.linewidth": 0.75, "figure.figsize": (9, 6)})
         distplot(sample, bins=50, kde=False, norm_hist=True,
                  hist_kws=dict(edgecolor="white", color=color, linewidth=1.0, alpha=0.60))
         x = arange(min(sample) - 2, max(sample) + 2, 0.01)
